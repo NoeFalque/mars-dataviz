@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Mars, Inc. Dashboard</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- MetisMenu CSS -->
+		<link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="css/app.css">
+
+		<!-- Google Font -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,800" rel="stylesheet"> 
+
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<div class="titleContainer">
+						<h2>Cacao DB</h2>					
+					</div>
+					<ul class="nav" id="side-menu">
+
+
+						<li>
+							<a href="index.html"><i class="fa fa-home fa-fw"></i> Dashboard</a>
+						</li>
+						<li>
+							 <a href="#"><i class="fa fa-cloud-upload fa-fw"></i> Other item</a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-search-plus fa-fw"></i>Other item</a>
+						</li>
+						<li class="open">
+							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Visualizations<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="#">Other item</a>
+								</li>
+								<li>
+									<a href="qtl.html">View QTL</a>
+								</li>
+								<li>
+									<a href="compare.html">Compare ancestries</a>
+								</li>
+								<li>
+									<a href="chromosomepainting.html" class="current">LG painting</a>
+								</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-table fa-fw"></i>Other item</a>
+						</li>
+
+
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+
+			<!-- Page Content -->
+			<div id="page-wrapper">
+
+				<!-- Navigation -->
+				<nav class="topBar">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+
+						<div class="input-group custom-search-form" id="simpleSearch">
+							<input type="text" class="form-control" placeholder="Search for a marker, sample ID...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+					<!-- /.navbar-header -->
+
+					<ul class="nav navbar-top-links navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+								</li>
+								<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+								</li>
+								<li class="divider"></li>
+								<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+								</li>
+							</ul>
+							<!-- /.dropdown-user -->
+						</li>
+						<!-- /.dropdown -->
+					</ul>
+					<!-- /.navbar-top-links -->
+				</nav>
+
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<h1 class="page-header">Chromosome painting tool</h1>
+
+
+							<div class="fileBar">
+								<div>
+									<p>Example files:</p>
+									<select name="selectFile" id="selectFile">
+										<option value="data-examples/WG0231160-DNAC02.json">WG0231160-DNAC02.json</option>
+										<option value="data-examples/WG0231143-DNAC04.json">WG0231143-DNAC04.json</option>
+									</select>
+								</div>
+								<div>
+									<p>Local file:</p>
+									<input type="file" name="loadFile" id="loadFile" accept=".json"/>
+								</div>
+							</div>
+
+
+
+							<style>
+								.container{
+									width: 940px;
+									margin: 0;
+								}
+								.svgContainer{
+									margin-right: 20px;
+									width: 600px;
+									display: inline-block;
+									vertical-align: top;
+									position: relative;
+								}
+								.svgContainer rect {
+									transition: opacity .3s;
+								}
+
+								.sideBar {
+									width:  230px;
+									background: white;
+									display: inline-block;
+									vertical-align: top;
+									margin-top: 4px;
+									padding: 0px 20px;
+									padding-bottom: 20px;
+								}
+								.sideBar h2 {
+									font-size: 16px;
+									font-weight: 800;
+								}
+								.legend {
+									padding: 0; margin: 0;
+								}
+								.legend li {
+									list-style: none;
+									padding: 10px;
+									border-top: 1px solid #f1f4f4;
+									cursor: pointer;
+								}
+								.legend li:hover {
+									background: #f1f4f4;
+									transition: .3s;
+								}
+								.legend li .colorSquare {
+									display: inline-block;
+									width: 12px;
+									height: 12px;
+									background: black;
+									margin: 0 10px;
+								}
+								.legend li .percentage {
+									color: #7f8c8d;
+									display: inline-block;
+									float: right;
+								}
+
+								.axis text {
+									font-size: 10px;
+								}
+								.axis path,
+								.axis line {
+									fill: none;
+									stroke: #000;
+									shape-rendering: crispEdges;
+								}
+
+								.x.axis path {
+									display: none;
+								}
+
+								.dot {
+									stroke: #000;
+								}
+
+								.tooltip {
+									position: absolute;
+									left: 0; top: 0;
+									padding: 6px 8px;
+									background: #bdc3c7;
+									transition: background .3s;
+									color: white;
+									font-size: 11px;
+								}/*
+								.tooltip:after {
+								content:"";
+								display: block;
+								position: absolute;
+								bottom: -10px;
+								left: 0;
+								width: 0; 
+								height: 0; 
+								/* triangle trick : *//*
+								border-left: 6px solid transparent;
+								border-right: 6px solid transparent;
+								border-top: 10px solid #bdc3c7;
+								}*/
+
+
+							</style>
+
+							<div class="container">
+								<div class="svgContainer">
+									<!--SVGs display here-->
+								</div>
+
+								<aside class="sideBar">
+									<h2>Ancestry classes: </h2>
+									<div class="legendContainer">
+										<!-- legend here-->
+									</div>
+								</aside>
+							</div>
+
+
+							<script src="js/d3.min.js"></script>
+							<script>
+								// function that acts like sprintf for digits
+								function n(n){
+									return n > 9 ? "" + n: "0" + n;
+								}
+
+								var wFull = 600;    // svg width (px?)
+								var hFull = 60;     // svg height (px?)
+								var margin = {top: 5, right: 0, bottom: 5, left: 50},
+										w = wFull - margin.left - margin.right,
+										h = hFull - margin.top - margin.bottom;
+								var btwchr = 2;
+								var lgHeight = 12;
+								var scalePadding = 0.05; // so that haplotype bar borders are not cut off by end of the svg element.  0.01 seems to work well
+								var cols = ["#8e44ad", "#f39c12", "#c0392b", "#d35400", "#16a085", "#27ae60", "#7f8c8d", "#2c3e50", "#2980b9", "#f1c40f", "#bdc3c7"]; // assumes 11 coloring categories
+								var ds;
+
+								/*
+		document.querySelector(".svgContainer").setAttribute("style", "width: "+wFull+"px");
+		window.onresize = function(){
+			var wFull = (window.innerWidth -500);
+			document.querySelector(".svgContainer").setAttribute("style", "width: "+wFull+"px");
+			var elems = document.querySelectorAll(".lgSvg");
+			for (var i=0; i < elems.length; i++) {
+				elems[i].style.width = wFull+"px";
+			}
+		};
+*/
+
+
+								//*** data from the list:
+
+								// default data :
+								var inputLoc = "data-examples/WG0231160-DNAC02.json";
+								dispFile(inputLoc);
+								// select from list :
+								var selectFile = document.querySelector("#selectFile");
+								selectFile.addEventListener("change", function(){ // file selected change
+									inputLoc = selectFile.options[selectFile.selectedIndex].value;
+									dispFile(inputLoc); // generate svgs
+								});
+
+								function dispFile(inputLoc){
+									// Read input file or URL and process the incoming dataset
+									d3.json( inputLoc , function(error, data) {
+										if (error) {
+											console.log(error);  
+										} else {
+											generateSvg(data);
+										}
+									});
+								}
+
+								//*** data from locally loaded file:
+								var inputFileElem = document.querySelector("#loadFile");
+								inputFileElem.onclick = function () {this.value = null;};
+								inputFileElem.addEventListener("change", function(){
+									var inputText = "Not filled yet";
+									var fr = new FileReader();
+									fr.readAsText(this.files[0], "utf-8");
+									fr.onload = function(e) {
+										inputText = e.target.result;
+										var data= JSON.parse(inputText);
+										generateSvg(data);
+									};
+								}, false);
+
+
+								//******* display LGs: *******//
+
+								// Called by dispFile() or dispData() 
+
+								function generateSvg(data){
+
+									document.querySelector(".svgContainer").innerHTML = ""; // remove old  svgs
+									document.querySelector(".legendContainer").innerHTML = "";
+
+									// Define the div for the tooltip
+									var tooltip = d3.select(".svgContainer").append("div")	
+									.attr("class", "tooltip")				
+									.style("opacity", 0);
+
+									ds=data.Clone;
+									//console.log( "Found haploblock data for " + ds.length + " Linkage Groups" );
+
+									// get max LG size :
+									var maxLgSize = 0;
+									ds.forEach( function(dLG, iLG) {
+										function getMaxInHaplo(haplo){
+											dLG[haplo].forEach( function(dZone, iZone){
+												if (dZone.PosEnd > maxLgSize) maxLgSize = dZone.PosEnd;
+												//console.log([iLG, haplo, iZone, dZone.PosEnd, dZone.PosStart, maxLgSize]);
+											});
+										}
+										getMaxInHaplo("Haplotype1");
+										getMaxInHaplo("Haplotype2");
+									});
+
+									// d3 scales
+									var xScale = d3.scale.linear()
+									.domain([1, maxLgSize + (maxLgSize*scalePadding) ])
+									.range([1, w]);
+
+									// iterate across all LG (Chromosomes)
+									totals = [];
+									totalBases = 0;
+									ds.forEach( function(dd, ii) {
+
+										// find SVG element corresponding to this Linkage Group
+										var lgName = "LG "+ n(ds[ii].LGnum); // if the LG number is in the data
+										if(ds[ii].LGnum == undefined) lgName = ii+1+"th LG"; // if not, just indicate its order in the JSON file
+
+										// generate SVG elements needed :
+										var svg = d3.select(".svgContainer").append("svg").attr("class", "lgSvg");
+										svg.attr("width",wFull).attr("height",hFull);     // todo: apply a class too
+										svg.append("text")
+											.text(lgName)
+											.attr({
+											x: (margin.left * 0.1),
+											y: (lgHeight + btwchr + margin.top),
+											"font-size": "12px",
+											"dominant-baseline": "central"
+										});
+
+										// <g> Container for this chromosome (i.e., both Haplotypes)
+										//      This containment is done in case QTL will (future) be added above haplotypes
+										var gchr = svg.append("g")
+										.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+										// <g> Containers for Haplotype1 and Haplotype2
+										var ghap1 = gchr.append("g")
+										var ghap2 = gchr.append("g")
+										.attr("transform", "translate(" + 0 + "," + (lgHeight + btwchr) + ")");
+
+										function displayHaplo(haplo, group){
+
+											ds[ii][haplo].forEach( function(xx) {
+												group.append("rect")
+													.attr({
+													fill: cols[(xx.AncestryNumb-1)],              
+													x: xScale(xx.PosStart),
+													y: 0,
+													width: (xScale(xx.PosEnd)-xScale(xx.PosStart)),
+													height: lgHeight,
+													class: xx.AncestryClass
+												})
+													.on("mouseover", function(d) {		
+													tooltip.transition()		
+														.duration(100)		
+														.style("opacity", .9);
+												})					
+													.on("mouseout", function(d) {		
+													tooltip.transition()		
+														.duration(500)		
+														.style("opacity", 0);	
+												})
+													.on("mousemove", function(d) {
+													var xPosition = d3.mouse(this)[0] +50;
+													var yPosition = d3.mouse(document.querySelector(".svgContainer"))[1] +30;
+													tooltip.style("transform", "translate(" + xPosition + "px ," + yPosition + "px )");
+													tooltip.text(xx.AncestryClass);
+													tooltip.style("background", cols[xx.AncestryNumb-1]);
+												});
+											});
+
+										}
+										displayHaplo("Haplotype1", ghap1);
+										displayHaplo("Haplotype2", ghap2);
+
+										// get total quantities of each ancestry class:
+										for(var i=0; i<2; i++){
+											var haplo = ["Haplotype1", "Haplotype2"][i];
+											ds[ii][haplo].forEach( function(xx) {
+												totalBases += xx.PosEnd-xx.PosStart;
+												// check for the class :
+												var classIndex = undefined;
+												for(var i=0; i<totals.length; i++){
+													if(totals[i].class == xx.AncestryClass){
+														classIndex = i;
+													}
+												}
+												if(classIndex==undefined){// if it's not there add it
+													totals.push({
+														class: xx.AncestryClass,
+														num: xx.AncestryNumb,
+														tot: xx.PosEnd-xx.PosStart
+													});
+												}
+												else {// if it is there add values only
+													totals[classIndex].tot += xx.PosEnd-xx.PosStart;
+												}
+											});
+										}
+
+									}); // end of ds.forEach 
+
+									var legends = d3.select(".legendContainer").append("ul").classed("legend", true).selectAll("li")
+									.data(totals).enter().append("li");
+									legends.append("span").classed("colorSquare", true).style("background", function(d){return cols[d.num - 1]});
+									legends.append("span").html(function(d){return d.class});
+									legends.append("span").classed("percentage", true).html(function(d){
+										return Math.round( 100* d.tot / totalBases) +"%";
+									});
+									legends.on("mouseover", function(d){
+										d3.selectAll(".svgContainer rect").style("opacity", "0.3");
+										d3.selectAll("."+d.class).style("opacity", "1");
+									});
+									legends.on("mouseout", function(d){
+										d3.selectAll(".svgContainer rect").style("opacity", "1");
+									});
+
+
+
+								} // end of generateSvg(data)
+
+							</script>
+
+
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+
+
+
+
+
+
+
+		<!-- jQuery -->
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+		<!-- Custom Theme JavaScript -->
+		<script src="../dist/js/sb-admin-2.js"></script>
+
+	</body>
+
+</html>

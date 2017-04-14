@@ -1,0 +1,232 @@
+{
+	"Clone": [
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 22705,
+					"PosEnd": 38981492,
+					"AncestryNumb": 9,
+					"AncestryClass": "Contamana"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 22705,
+					"PosEnd": 38981492,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 1335,
+					"PosEnd": 42403662,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 1335,
+					"PosEnd": 2796779,
+					"AncestryNumb": 8,
+					"AncestryClass": "Nacional"
+				},
+				{
+					"PosStart": 2806811,
+					"PosEnd": 42403662,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 19005,
+					"PosEnd": 18659520,
+					"AncestryNumb": 1,
+					"AncestryClass": "Iquitos"
+				},
+				{
+					"PosStart": 18681199,
+					"PosEnd": 34325455,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 19005,
+					"PosEnd": 34325455,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 2939,
+					"PosEnd": 33464087,
+					"AncestryNumb": 9,
+					"AncestryClass": "Contamana"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 2939,
+					"PosEnd": 33464087,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 31218,
+					"PosEnd": 4328682,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				},
+				{
+					"PosStart": 4403272,
+					"PosEnd": 40431336,
+					"AncestryNumb": 9,
+					"AncestryClass": "Contamana"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 31218,
+					"PosEnd": 40431336,
+					"AncestryNumb": 7,
+					"AncestryClass": "Guiana"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 102379,
+					"PosEnd": 27242160,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 102379,
+					"PosEnd": 27242160,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 13610,
+					"PosEnd": 24360414,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 13610,
+					"PosEnd": 2881352,
+					"AncestryNumb": 6,
+					"AncestryClass": "Curaray"
+				},
+				{
+					"PosStart": 2953869,
+					"PosEnd": 5934779,
+					"AncestryNumb": 1,
+					"AncestryClass": "Iquitos"
+				},
+				{
+					"PosStart": 6018133,
+					"PosEnd": 24360414,
+					"AncestryNumb": 2,
+					"AncestryClass": "Amelonado"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 50812,
+					"PosEnd": 21476007,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 50812,
+					"PosEnd": 21476007,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 27349,
+					"PosEnd": 5804281,
+					"AncestryNumb": 1,
+					"AncestryClass": "Iquitos"
+				},
+				{
+					"PosStart": 5815553,
+					"PosEnd": 41993160,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 27349,
+					"PosEnd": 2942096,
+					"AncestryNumb": 3,
+					"AncestryClass": "Purus"
+				},
+				{
+					"PosStart": 2952348,
+					"PosEnd": 41993160,
+					"AncestryNumb": 9,
+					"AncestryClass": "Contamana"
+				}
+			]
+		},
+		{
+			"Haplotype1": [
+				{
+					"PosStart": 60503,
+					"PosEnd": 25399311,
+					"AncestryNumb": 10,
+					"AncestryClass": "Maranon"
+				}
+			],
+			"Haplotype2": [
+				{
+					"PosStart": 60503,
+					"PosEnd": 3789676,
+					"AncestryNumb": 9,
+					"AncestryClass": "Contamana"
+				},
+				{
+					"PosStart": 3806591,
+					"PosEnd": 25399311,
+					"AncestryNumb": 8,
+					"AncestryClass": "Nacional"
+				}
+			]
+		}
+	]
+}

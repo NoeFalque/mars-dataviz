@@ -1,0 +1,6 @@
+SampleID,SampleName,SampleDetails,FirstFamily,SecondFamily,ThirdFamily
+M1N2C3,TSH1188,TSH-1188,0.1,0.2,0.3
+M2N3C1,JA_5_5,JA_5_5,0.2,0.3,0.1
+M3N1C2,K82,K82,0.3,0.1,0.2
+M0N4C6,KA2,KA2,0.0,0.4,0.6
+M6N4C0,LCTEEN_46,LCT_EEN_46,0.6,0.4,0.0

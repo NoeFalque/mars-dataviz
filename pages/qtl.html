@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Mars, Inc. Dashboard</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- MetisMenu CSS -->
+		<link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+		<!-- Custom CSS -->
+		<link rel="stylesheet" href="css/app.css">
+
+		<!-- Google Font -->
+		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,800" rel="stylesheet"> 
+
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+	</head>
+
+	<body>
+
+		<div id="wrapper">
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<div class="titleContainer">
+						<h2>Cacao DB</h2>					
+					</div>
+					<ul class="nav" id="side-menu">
+
+
+						<li>
+							<a href="index.html"><i class="fa fa-home fa-fw"></i> Dashboard</a>
+						</li>
+						<li>
+							 <a href="#"><i class="fa fa-cloud-upload fa-fw"></i> Other item</a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-search-plus fa-fw"></i>Other item</a>
+						</li>
+						<li class="open">
+							<a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Visualizations<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li>
+									<a href="#">Other item</a>
+								</li>
+								<li>
+									<a href="qtl.html" class="current">View QTL</a>
+								</li>
+								<li>
+									<a href="compare.html">Compare ancestries</a>
+								</li>
+								<li>
+									<a href="chromosomepainting.html">LG painting</a>
+								</li>
+							</ul>
+							<!-- /.nav-second-level -->
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-table fa-fw"></i>Other item</a>
+						</li>
+
+
+					</ul>
+				</div>
+				<!-- /.sidebar-collapse -->
+			</div>
+
+			<!-- Page Content -->
+			<div id="page-wrapper">
+
+				<!-- Navigation -->
+				<nav class="topBar">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+
+						<div class="input-group custom-search-form" id="simpleSearch">
+							<input type="text" class="form-control" placeholder="Search for a marker, sample ID...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+					<!-- /.navbar-header -->
+
+					<ul class="nav navbar-top-links navbar-right">
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+								<i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+							</a>
+							<ul class="dropdown-menu dropdown-user">
+								<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+								</li>
+								<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+								</li>
+								<li class="divider"></li>
+								<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+								</li>
+							</ul>
+							<!-- /.dropdown-user -->
+						</li>
+						<!-- /.dropdown -->
+					</ul>
+					<!-- /.navbar-top-links -->
+				</nav>
+
+
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-lg-12">
+							<h1 class="page-header">QTL overlay tool</h1>
+
+
+
+							<div class="fileBar">
+								<div>
+									<p>Example files:</p>
+									<select name="selectFile" id="selectFile">
+										<option value="data-examples/qtl_ultrasimple.csv">qtl_ultrasimple.csv</option>
+										<option value="data-examples/qtl.example.data.QTL001.csv">qtl.example.data.QTL001.csv</option>
+										<option value="data-examples/qtl.example.data.QTL002.csv">qtl.example.data.QTL002.csv</option>
+									</select>
+								</div>
+								<div>
+									<p>Local file:</p>
+									<input type="file" name="loadFile" id="loadFile" accept=".csv"/>
+								</div>
+							</div>
+
+
+
+							<style>
+								.container{
+									margin: auto;
+									padding: 20px;
+								}
+								.domain {
+									fill: transparent;
+									stroke: #34495e;
+									stroke-width: 2px;
+								}
+								.c3-tooltip-container {
+									background: rgba(255,255,255,.85);
+									padding: 10px;
+									font-size: 12px;
+									box-shadow: 1px 1px 5px rgba(0,0,0,.3);
+									transition: transform .05s;
+								}
+								.c3-tooltip-container tr:first-child {
+									font-size: 14px; 
+									font-weight: bolder;
+								}
+								.c3-tooltip-container .value {
+									font-weight: bold;
+								}
+								.c3-tooltip-container .name span {
+									display: inline-block;
+									width: 10px;
+									height: 10px;
+									margin-right: 10px;
+								}
+								.region-test{
+									stroke: black;
+								}
+								.c3-tooltip-name--rectHeight {
+									display: none;
+								}
+								.c3-shapes-bigRect path {
+									stroke-width: 1px;
+									stroke: #bdc3c7;
+								}
+								.lgNum {
+									margin-bottom: -22px;
+									position: relative;
+									z-index: 3;
+								}
+								.lgNum button {
+									padding: 0 6px;
+									margin-left: 6px;
+								}
+								.chart {
+									overflow-x: hidden;
+									overflow-y: hidden;
+									height: 32px;
+									transition: height .5s;
+								}
+								.chart svg {
+									margin-top: -268px;
+									transition: margin-top .3s;
+								}
+								.chart.open {
+									height: 350px;
+									transition: height .3s;
+								}
+								.chart.open svg {
+									margin-top: 0;
+									transition: margin-top .5s;
+								}
+								.chart svg .c3-axis  {
+									opacity: 0 !important;
+									transition: .2s;
+								}
+								.chart.open svg .c3-axis  {
+									opacity: 1 !important;
+									transition: .2s;
+								}
+
+
+							</style>
+
+
+							<div id="loaderBox">
+								<div class="loading">
+									<div class="loading-animation">
+										<span></span>
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+									<p>Loading...</p>
+								</div>
+							</div>
+
+							<div class="container">
+							</div>
+
+
+							<script src="js/d3.min.js"></script>
+							<script src="js/c3-0.4.11/c3.min.js"></script>
+							<script>
+
+								//debug: 
+								var obj1, obj2, tp1, tp2;
+								document.querySelector("h1").addEventListener("click", function(){
+									console.log(obj1);
+									console.log(obj2);
+									console.log(obj1[1].LG, obj1[1].y, obj1[1]["y"]);
+									console.log(obj2[1].LG, obj2[1].y, obj2[1]["y"]);
+									console.log(tp1==tp2);
+									console.log(obj2[2].y==obj1[2].y);
+								});
+
+								// loader :
+								function showLoader(){
+									document.querySelector(".loading").style.display = "block";
+								}
+								function hideLoader(){
+									var loader = document.querySelector(".loading");
+									if (loader) loader.style.display = "none";
+								}
+
+								//*** data from the list:
+
+								var inputLoc = "data-examples/qtl_ultrasimple.csv";// default data
+								dispFile(inputLoc);
+								// select from list :
+								var selectFile = document.querySelector("#selectFile");
+								selectFile.addEventListener("change", function(){ // file selected change
+									showLoader();
+									inputLoc = selectFile.options[selectFile.selectedIndex].value;
+									dispFile(inputLoc); // generate svgs
+								});
+
+								function dispFile(inputLoc){
+									// Read input file or URL and process the incoming dataset
+									d3.csv( inputLoc , function(error, data) {
+										if (error) {
+											console.log(error);  
+										} else {
+											obj1 = data;
+											generateSvg(data);
+										}
+									});
+								}								
+
+								//*** data from locally loaded file:
+
+								var inputFileElem = document.querySelector("#loadFile");
+								inputFileElem.onclick = function () {this.value = null;};
+								inputFileElem.addEventListener("change", function(){
+									showLoader();
+									var inputText = "Not filled yet";
+									var fr = new FileReader();
+									fr.readAsText(this.files[0], "utf-8");
+									fr.onload = function(e) {
+										inputText = e.target.result;
+										tp2 = inputText;
+										console.log(inputText);
+										var data= csvJSON(inputText);
+										obj2 = data;
+										generateSvg(data);
+									};
+								}, false);
+
+								function csvJSON(csv){
+									var lines=csv.split("\n");
+									var result = [];
+									var headers=lines[0].split(",");
+									for(var i=1;i<lines.length-1;i++){
+										var obj = {};
+										var currentline=lines[i].split(",");
+										for(var j=0;j<headers.length;j++){
+											obj[headers[j]] = currentline[j];
+										}
+										result.push(obj);
+									}
+									return result;
+								}
+
+								//*** useful functions: 
+
+								var hoveredChart;
+
+								function getColor(y){
+									if(y>5) return "#c0392b";
+									else if(y>4) return "#d35400";
+									else if(y>3) return "#f39c12";
+									else if(y>2) return "#f1c40f";
+									else if(y>1.5) return "#2ecc71";
+									else if(y>1) return "#27ae60";
+									else if(y>0.5) return "#3498db";
+									else return "#2980b9";
+								}
+
+								//******* display LGs: *******//
+
+								function generateSvg(data){// Called by dispFile() or choose local file 
+
+
+									document.querySelector(".container").innerHTML = "";
+
+									var lgs = [];
+
+									// format for c3:
+									for(i in data){
+										if(!lgs[data[i].LG - 1]){
+											lgs[data[i].LG - 1] = [];//create sub-array
+											lgs[data[i].LG - 1].push(["markerName", "position", "y", "bigRect", "rectHeight"]);//column names
+										} 
+										lgs[data[i].LG - 1].push([ data[i].markerName, data[i].position, data[i].y, 2.01, 2]);
+									}
+									var iLg = 0;
+									var charts = [];
+
+									//containers for each chart:
+									for(iLg in lgs){
+										var dispILg = parseInt(iLg)+1;
+										document.querySelector(".container").innerHTML += "<div class='lgNum'>LG "+dispILg+" <button type='button' id='open"+iLg+"'> ↴ </button></div>";
+										document.querySelector(".container").innerHTML += "<div class='chart' id='chart"+iLg+"'></div>";
+									}
+
+									//generate charts:
+									for(iLg in lgs){
+										var d = lgs[iLg];
+										var chartSelector = "#chart"+iLg;
+
+
+										charts[iLg] = c3.generate({
+											bindto: d3.select(chartSelector),
+											padding: {
+												left: 100,
+												right: 10
+											},
+											size: {
+												height: 300
+											},
+											data: {
+												rows: d,
+												type: "scatter",
+												types: {
+													bigRect: "area",
+													rectHeight: "bar"
+												},
+												x: "position",
+												y: "y",
+												colors: {
+													y: function(d){ return getColor(d.value);},
+													bigRect: "rgba(10,0,10,0.0)",
+													rectHeight: '#27ae60'
+												},
+												axes: {
+													y: "y",
+													bigRect: "y2",
+													rectHeight: "y2"
+												}
+											},
+											point: {
+												show: false
+											},
+											axis: {
+												x: {
+													tick: {
+														rotate: 20
+													},
+													show: false
+												},
+												y: {
+													min: 0,
+													show: true
+												},
+												y2: {
+													min: 2.05,
+													max: 25,
+													show: false
+												}
+											},
+											zoom: {
+												enabled: true,
+												rescale: false,
+												onzoomend: function (domain) {
+													//document.querySelector("#chart"+hoveredChart).innerHTML += "<p>"+domain[1]-domain[0]+"</p>";
+												}
+											},
+											tooltip: {
+												contents: function (d, defaultTitleFormat, defaultValueFormat, color) {
+													var text = "<table class='" + this.CLASS.tooltip + "'><tr><th colspan='2'>Marker: " + getValue(hoveredChart, "markerName", d[0].x) + "</th></tr>";
+													text += "<tr><td class='name'>Position: </td><td class='value'>" + d[0].x +"</td></tr>";
+													text += "<tr><td class='name'>Y: </td><td class='value'>" + getValue(hoveredChart, "y", d[0].x) +"</td></tr>";
+													return text + "</table>";
+												}
+											},
+											bar: {
+												width: 2
+											},
+											legend:{
+												show: false
+											},
+											onrendered: function(){
+
+												hideLoader();
+
+												// color LG bars: 
+												var lgBars = d3.selectAll(chartSelector+" .c3-bar")[0];
+												for(var i=0; i<lgBars.length; i++){
+													var xPos = lgBars[i].__data__.x;
+													var yValue = getValue(iLg, "y", xPos);
+													var color = getColor(yValue);
+													lgBars[i].style.stroke = color;
+													lgBars[i].style.fill = color;
+												}
+
+											}
+										});
+
+
+										// ugly but only way to get data to a c3 tooltip:
+										function getValue(iLg, property, xPos){
+											var d= lgs[iLg];
+											if(property == "y") var prop = 2;
+											if(property == "markerName") var prop = 0;
+											for(i in d){
+												if(d[i][1]==xPos) return d[i][prop];
+											}
+										}
+
+									} // end of for (iLg in lgs)
+
+									// ugly but only way to know which chart the c3 tooltip is in: 
+									document.addEventListener("mousemove", function(){
+										for(i in lgs) {
+											if(document.querySelector("#chart"+i)){
+												d3.select("#chart"+i).on("mouseover", function(){
+													hoveredChart = this.getAttribute("id").substr(5);
+												});
+											}
+										}
+									});
+
+									// Open/close buttons: 
+									d3.selectAll("button").on("click", function(){
+										var lg = this.getAttribute("id").substr(4);
+										if(d3.select("#chart"+lg).classed("open")) {
+											d3.select("#chart"+lg).classed("open", false);
+											charts[lg].unzoom();
+										}
+										else d3.select("#chart"+lg).classed("open", true);
+									});
+
+								} // end of generateSvg(data)
+
+
+							</script>
+
+
+
+						</div>
+						<!-- /.col-lg-12 -->
+					</div>
+					<!-- /.row -->
+				</div>
+				<!-- /.container-fluid -->
+			</div>
+			<!-- /#page-wrapper -->
+
+		</div>
+		<!-- /#wrapper -->
+
+		<!-- jQuery -->
+		<script src="../bower_components/jquery/dist/jquery.min.js"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+		<!-- Custom Theme JavaScript -->
+		<script src="../dist/js/sb-admin-2.js"></script>
+
+	</body>
+
+</html>
